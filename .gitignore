@@ -2,4 +2,5 @@
 #Removing the cache
 **/__pycache__/
 
-/generator/
+#Removing local scores
+.res.txt
