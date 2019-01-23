@@ -1,0 +1,5 @@
+
+#Removing the cache
+**/__pycache__/
+
+/generator/
