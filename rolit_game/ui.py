@@ -3,6 +3,7 @@
 import pygame
 from math import inf as infinity
 
+from rolit_game.settings import Settings
 from rolit_game.helpers import compute_distance
 
 # Slow loading done before displaying any UI
@@ -44,7 +45,7 @@ class UI:
         """
         pygame.display.flip()
 
-    def cell_index_from_pos(self, cell_pos: tuple):
+    def cell_index_from_pos(self, cell_pos: tuple) -> tuple:
         """Get the index of a cell passing its coordonates
         Swapping axes because the coordinate system  X/Y for the mouse isn't the same as row/columns
         ----→ mouseX                   ------→ column
@@ -91,11 +92,11 @@ class UI:
         self.screen.blit(self.board_img, (0, 0))
         for i in range(len(board)):
             for j in range(len(board)):
-                if board[i][j] == 1:
+                if board[i][j] == Settings.PLAYER1:
                     self.add_coin_img(self.red_coin, self.pos_from_cell_index((j, i)))
-                elif board[i][j] == 2:
+                elif board[i][j] == Settings.PLAYER2:
                     self.add_coin_img(self.green_coin, self.pos_from_cell_index((j, i)))
-                elif board[i][j] == 100:
+                elif board[i][j] == Settings.DEAD_CELL:
                     self.add_coin_img(self.dead_cell, self.pos_from_cell_index((j, i)))
 
         textsurface = self.font_score.render(f'{scores[0]} - {scores[1]}', False, (150, 150, 150))

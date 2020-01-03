@@ -76,13 +76,28 @@ class Popup:
 
         image_l.pack()
 
-        ttk.Button(tab1, text="I am already familiar with the rules", cursor="hand2", command=lambda: Popup.seek_tab(NB, tab2)).pack()
+        ttk.Button(
+            tab1,
+            text="I am already familiar with the rules",
+            cursor="hand2",
+            command=lambda: Popup.seek_tab(NB, tab2)).pack()
         ttk.Label(tab2, text="Select the size of the board : ").grid(row=0)
-        ttk.Radiobutton(tab2, text="5x5", cursor="hand2", variable=board_size, value="5x5").grid(row=1, column=0)
-        ttk.Radiobutton(tab2, text="8x8", cursor="hand2", variable=board_size, value="8x8").grid(row=1, column=1)
+        ttk.Radiobutton(
+            tab2,
+            text="5x5",
+            cursor="hand2",
+            variable=board_size,
+            value="5x5").grid(row=1, column=0)
+        ttk.Radiobutton(
+            tab2,
+            text="8x8",
+            cursor="hand2",
+            variable=board_size,
+            value="8x8").grid(row=1, column=1)
 
         #Simple line separator
-        ttk.Separator(tab2, orient=HORIZONTAL).grid(row=2, columnspan=5, sticky=EW)
+        ttk.Separator(tab2, orient=HORIZONTAL) \
+          .grid(row=2, columnspan=5, sticky=EW)
 
         # Binding variables
         gamemode = StringVar()
@@ -94,13 +109,37 @@ class Popup:
 
         ttk.Label(tab2, text="Which mode do you want to play ?").grid(row=3)
 
-        is_ai_game = ttk.Radiobutton(tab2, text='Me versus AI', cursor='hand2', variable=gamemode, value="Player-AI", command=lambda: Popup.enable_widget(spin))
+        is_ai_game = ttk.Radiobutton(tab2,
+        text='Me versus AI',
+            cursor='hand2',
+            variable=gamemode,
+            value="Player-AI",
+            command=lambda: Popup.enable_widget(spin))
         is_ai_game.grid(row=4, column=0)
-        spin = ttk.Spinbox(tab2, textvariable=ai_level, state='readonly', values=values, takefocus=False, wrap=True, width=15, justify='center', validate='all', validatecommand=tab2.focus())
+        spin = ttk.Spinbox(tab2,
+                           textvariable=ai_level,
+                           state='readonly',
+                           values=values,
+                           takefocus=False,
+                           wrap=True,
+                           width=15,
+                           justify='center',
+                           validate='all',
+                           validatecommand=tab2.focus())
         spin.grid(row=4, column=1)
         # f value to obtain at the end a empty string -> false value
-        ttk.Radiobutton(tab2, text="Two player mod", cursor="hand2", variable=gamemode, value="Player-Player", command=lambda: Popup.disable_widget(spin)).grid(row=5)
-        ttk.Radiobutton(tab2, text="2 AI Game", cursor="hand2", variable=gamemode, value="AI-AI", command=lambda: Popup.enable_widget(spin)).grid(row=6)
+        ttk.Radiobutton(tab2,
+                        text="Two player mod",
+                        cursor="hand2",
+                        variable=gamemode,
+                        value="Player-Player",
+                        command=lambda: Popup.disable_widget(spin)).grid(row=5)
+        ttk.Radiobutton(tab2,
+                        text="2 AI Game",
+                        cursor="hand2",
+                        variable=gamemode,
+                        value="AI-AI",
+                        command=lambda: Popup.enable_widget(spin)).grid(row=6)
 
         ttk.Separator(tab2, orient=HORIZONTAL).grid(row=7, columnspan=5, sticky=EW)
 
@@ -109,14 +148,27 @@ class Popup:
         #Extracting scores
         results = [s.split(':')[1] for s in scores.split('-')]
 
-        ttk.Label(tab2, text="Your personnal best in 5x5 mode against AI : ").grid(row=8)
+        ttk.Label(tab2, text="Your personnal best in 5x5 mode against AI : ") \
+          .grid(row=8)
         #Printing scores
-        ttk.Label(tab2, text=f"Easy Mode : {results[0]}", style="Small.TLabel").grid(row=9)
-        ttk.Label(tab2, text=f"Medium Mode : {results[1]}", style="Small.TLabel").grid(row=10)
-        ttk.Label(tab2, text=f"Hard Mode : {results[2]}", style="Small.TLabel").grid(row=11)
-        ttk.Label(tab2, text=f"Expert Mode : {results[3]}", style="Small.TLabel").grid(row=12)
+        ttk.Label(tab2,
+                  text=f"Easy Mode : {results[0]}",
+                  style="Small.TLabel").grid(row=9)
+        ttk.Label(tab2,
+                  text=f"Medium Mode : {results[1]}",
+                  style="Small.TLabel").grid(row=10)
+        ttk.Label(tab2,
+                  text=f"Hard Mode : {results[2]}",
+                  style="Small.TLabel").grid(row=11)
+        ttk.Label(tab2,
+                  text=f"Expert Mode : {results[3]}",
+                  style="Small.TLabel").grid(row=12)
 
-        ttk.Button(tab2, text="Let's play !", cursor="hand2", command=lambda: Popup.user_click(root, class_bool)).grid(row=13, columnspan=2, sticky=E)
+        ttk.Button(tab2,
+                   text="Let's play !",
+                   cursor="hand2",
+                   command=lambda: Popup.user_click(root, class_bool)) \
+                    .grid(row=13, columnspan=2, sticky=E)
 
         NB.add(tab1, text='Tutorial')
         NB.pack()
@@ -128,7 +180,8 @@ class Popup:
         except TclError:
             pass
 
-        return f'{board_size.get()}  {gamemode.get()}  {ai_level.get()[2:]}  {class_bool.boolean}'
+        return f'{board_size.get()}  {gamemode.get()}  ' \
+               f'{ai_level.get()[2:]}  {class_bool.boolean}'
 
     @staticmethod
     def load_score():
@@ -195,8 +248,11 @@ class Popup:
 
         root.title("Primordial rules")
 
-        ttk.Label(root, text="You need to place your coin in an empty cell near an other one"
-                             " filled (side to side or in bias)", style="Small.TLabel", padding=5).pack()
+        ttk.Label(root, 
+                  text="You need to place your coin in an empty cell near "
+                  "an other one filled (side to side or in bias)",
+                  style="Small.TLabel",
+                  padding=5).pack()
 
         root.geometry(f'+{x}+{y}')
         root.mainloop()

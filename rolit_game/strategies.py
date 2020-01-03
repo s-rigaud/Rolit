@@ -30,8 +30,8 @@ class AI_Strategy(ABC):
         """Return all cells with a surrounding coin
         """
         all_playable_cells = []
-        for i in range(len(board)):
-            for j in range(len(board)):
+        for i, line in enumerate(board):
+            for j, _ in enumerate(line):
                 if board[i][j] == 0 and exist_adjacent_cell(board, (i, j)):
                     all_playable_cells.append((i, j))
         return all_playable_cells
@@ -152,9 +152,8 @@ class MiniMaxStrategy(AI_Strategy):
             all_best_moves = list(filter(lambda x: x[2] == maxScore, all_moves))
             print(f'All best moves : {all_best_moves}')
             return choice(all_best_moves)
-        else :
+        else:
             minScore = min([move[2] for move in all_moves])
             all_worst_moves = list(filter(lambda x: x[2] == minScore, all_moves))
             print(f'All worst moves : {all_worst_moves}')
             return choice(all_worst_moves)
-

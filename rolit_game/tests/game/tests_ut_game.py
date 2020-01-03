@@ -24,7 +24,7 @@ class TestStringMethods(unittest.TestCase):
     def test_place_dead_cells(self):
         g._init_board_lists()
         g._place_dead_cells()
-        nb_dead_cell = sum((line.count(100) for line in g.board))
+        nb_dead_cell = sum((line.count(g.dead_coin_value) for line in g.board))
         self.assertTrue(nb_dead_cell)
 
 

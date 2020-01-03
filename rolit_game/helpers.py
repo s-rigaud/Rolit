@@ -1,4 +1,4 @@
-"""
+""" Simple functions really useful
 """
 
 from math import sqrt
